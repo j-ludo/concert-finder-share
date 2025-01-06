@@ -1,148 +1,223 @@
-# Concert Finder
+# Concert Finder 🎵
 
-**ask claude.ai for help with any of these steps and feed back in errors you get for corrections**
-**also make sure you let claude know the names and directories you are using as you go, any info you don't want to manually change it'll keep track of**
+Find concerts by your favorite Spotify artists in cities you'll be visiting! This tool automatically:
+- Gets your favorite artists from Spotify
+- Checks your Google Calendar for travel dates
+- Searches multiple concert APIs for shows
 
+## 🌟 Features
 
-A program that finds concerts by your favorite Spotify artists in cities you'll be visiting, based on your Google Calendar events.
+- **Interactive Setup**: Guided setup process for all required APIs
+- **Multiple Data Sources**: Choose from SeatGeek, Bandsintown, and Songkick
+- **Smart Integration**: 
+  - Automatically finds your Spotify favorites
+  - Uses your actual travel dates from Google Calendar
+  - Combines results from multiple concert sources
+- **Smart Results**:
+  - Automatic duplicate removal
+  - Location-based grouping
+  - Price comparisons (when available)
+  - Direct ticket links
 
-## Quick Start
+## 🚀 Quick Start
 
-1. Install required packages:
+1. **Install Requirements**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run the Program**
+   ```bash
+   python concert_finder.py
+   ```
+   The program will guide you through:
+   - Setting up Google Calendar access
+   - Connecting your Spotify account
+   - Choosing and configuring concert APIs
+
+## 🔍 How It Works
+
+1. **First Run Setup**
+   - The program will guide you through setting up each service
+   - Follow the prompts to configure each API you want to use
+   - You can skip any concert APIs you don't want to use
+
+2. **Running Searches**
+   - Select which concert APIs to use for each search
+   - The program shows which APIs are available based on your config
+   - Results combine data from all selected sources
+
+3. **View Results**
+   - Concerts are grouped by location
+   - Results show venue, date, and ticket information
+   - Prices are shown when available
+
+## ❗ Troubleshooting
+
+### Common Issues
+
+| Problem | Solution |
+|---------|----------|
+| Authentication errors | Run `python cleanup.py` to reset credentials |
+| Invalid client error | Double-check your API credentials |
+| Calendar errors | Follow the setup prompts to reconfigure |
+| Missing results | Ensure calendar events have locations |
+
+### Reset Everything
 ```bash
-pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client spotipy requests
+python cleanup.py --force
 ```
 
-2. Run the interactive setup:
-```bash
-python setup_config.py
-```
+## 🔒 Privacy
 
-3. Set up Google Calendar API (see detailed instructions below)
+- All data and credentials remain on your local machine
+- No data is shared with external services beyond API calls
+- API keys and tokens are stored only in your local config
 
-4. Verify your setup:
-```bash
-python setup_test.py
-```
+## 🤝 Contributing
 
-5. Run the program:
-```bash
-python concert_finder.py
-```
+Found a bug or have an idea for improvement? Please:
+1. Check existing issues
+2. Test with the latest version
+3. Open an issue with details
+4. Feel free to submit pull requests
 
-## Detailed Setup Instructions
+## 📜 License
 
-### 1. Google Calendar API Setup
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.# Concert Finder 🎵
 
+Find concerts by your favorite Spotify artists in cities you'll be visiting! This tool integrates with:
+- Your Spotify library to know your favorite artists
+- Your Google Calendar to know your travel dates
+- Multiple concert APIs to find shows near you
+
+## 🌟 Features
+
+- **Multiple Data Sources**: Search across SeatGeek, Bandsintown, and Songkick simultaneously
+- **Smart Integration**: Uses your actual Spotify favorites and travel dates
+- **Interactive Selection**: Choose which concert APIs to use each time
+- **Smart Results**:
+  - Automatic duplicate removal
+  - Location-based grouping
+  - Price comparisons (when available)
+  - Direct ticket links
+
+## 🚀 Quick Start
+
+1. **Install Requirements**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Set Up Configuration**
+   ```bash
+   python setup_config.py
+   ```
+
+3. **Configure APIs** (see detailed instructions below)
+
+4. **Verify Setup**
+   ```bash
+   python setup_test.py
+   ```
+
+5. **Run the Program**
+   ```bash
+   python concert_finder.py
+   ```
+
+## 🔧 API Setup
+
+### Required APIs
+
+#### 1. Google Calendar API
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Google Calendar API:
-   - Go to "APIs & Services" > "Library"
-   - Search for "Google Calendar API"
-   - Click "Enable"
-4. Set up OAuth consent screen:
-   - Go to "APIs & Services" > "OAuth consent screen"
-   - Choose "External"
-   - Fill in required information (App name, user support email, developer contact email)
-5. Create credentials:
-   - Go to "APIs & Services" > "Credentials"
-   - Click "Create Credentials" > "OAuth client ID"
-   - Choose "Desktop application"
-   - Download the JSON file
-   - Save it as `credentials.json` in your project folder
+2. Create a project & enable Google Calendar API
+3. Set up OAuth consent screen
+4. Create credentials (OAuth client ID)
+5. Download and save as `credentials.json`
 
-### 2. Spotify API Setup
+#### 2. Spotify API
+1. Visit [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Create a new app
+3. Set redirect URI to: `http://localhost:8888/callback`
+4. Note your Client ID and Secret
 
-1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Log in and create a new app
-3. Fill in:
-   - App name (e.g., "Concert Finder")
-   - Description
-   - Redirect URI: `http://localhost:8888/callback`
-4. Note down your Client ID and Client Secret
+### Optional APIs (Choose at least one)
 
-### 3. SeatGeek API Setup
+#### SeatGeek API
+- Register at [SeatGeek Developer](https://seatgeek.com/account/develop)
+- Get your Client ID and Secret
 
-1. Go to [SeatGeek Developer](https://seatgeek.com/account/develop)
-2. Create a new application
-3. Note down your Client ID and Client Secret
+#### Bandsintown API
+- Apply at [Bandsintown for Partners](https://www.bandsintown.com/partners)
+- Store your App ID when approved
 
-## Configuration
+#### Songkick API
+- Request access at [Songkick API](https://www.songkick.com/developer)
+- Save your API key when received
 
-Run the interactive setup script:
+## 📝 Configuration
+
+Run the setup wizard:
 ```bash
 python setup_config.py
 ```
 
-This will prompt you for:
+You'll need to provide:
 - Your home location (e.g., "New York, USA")
-- Spotify credentials
-- SeatGeek credentials
+- Credentials for your chosen APIs
 
-## Testing Your Setup
+## 🔍 Usage
 
-Run the test script to verify everything is working:
+1. **Prepare Your Calendar**
+   - Add events with locations for your travels
+   - Events without locations will be ignored
+
+2. **Run the Program**
+   ```bash
+   python concert_finder.py
+   ```
+
+3. **Select APIs**
+   - Choose which concert sources to use
+   - The program shows which APIs are available based on your config
+
+4. **View Results**
+   - Concerts are grouped by location
+   - Results show venue, date, and ticket information
+   - Prices are shown when available
+
+## ❗ Troubleshooting
+
+### Common Issues
+
+| Problem | Solution |
+|---------|----------|
+| Authentication errors | Run `python cleanup.py` to reset credentials |
+| Invalid client error | Double-check your API credentials |
+| Calendar errors | Verify `credentials.json` is present |
+| Missing results | Ensure calendar events have locations |
+
+### Reset Everything
 ```bash
-python setup_test.py
+python cleanup.py --force
 ```
 
-This will check:
-- Configuration file
-- Google Calendar connection
-- Spotify connection
-- SeatGeek API access
+## 🔒 Privacy
 
-## Usage
+- All data and credentials remain on your local machine
+- No data is shared with external services beyond API calls
+- API keys and tokens are stored only in your local config
 
-1. Add events with locations to your Google Calendar for your travels
-2. Run the program:
-```bash
-python concert_finder.py
-```
+## 🤝 Contributing
 
-The program will:
-- Get your favorite artists from Spotify
-- Check your travel dates from Google Calendar
-- Find concerts in cities you're visiting
-- Show details including venue, date, and ticket links
+Found a bug or have an idea for improvement? Please:
+1. Check existing issues
+2. Test with the latest version
+3. Open an issue with details
+4. Feel free to submit pull requests
 
-## Troubleshooting
+## 📜 License
 
-If you encounter issues:
-
-1. Run the cleanup script to reset all credentials:
-```bash
-python cleanup.py
-```
-
-2. Verify your setup:
-```bash
-python setup_test.py
-```
-
-3. Common issues:
-   - Authentication errors: Run cleanup.py and try again
-   - "Invalid client" error: Check your API credentials
-   - Calendar errors: Verify credentials.json is in the project folder
-
-## Available Scripts
-
-- `concert_finder.py` - Main program
-- `setup_config.py` - Interactive configuration setup
-- `setup_test.py` - Test your configuration and API connections
-- `cleanup.py` - Reset authentication and cached data
-
-Extra options:
-- `python cleanup.py --force` - Skip confirmation prompt
-- `python setup_test.py --clean` - Run cleanup through test script
-
-## Privacy Note
-
-This is a personal tool that runs locally on your computer. Your credentials and data remain private and are only used to access the respective APIs.
-
-## Notes
-
-- The program looks for concerts during any calendar event with a location different from your home location
-- It combines both your followed artists and top artists from Spotify
-- Concerts are sorted by date
-- Prices are shown when available through SeatGeek
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
