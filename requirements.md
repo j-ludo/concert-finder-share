@@ -1,5 +1,0 @@
-google-auth-oauthlib>=0.4.6
-google-auth-httplib2>=0.1.0
-google-api-python-client>=2.0.0
-spotipy>=2.19.0
-requests>=2.26.0
