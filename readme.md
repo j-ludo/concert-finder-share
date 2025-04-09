@@ -24,7 +24,6 @@ Find concerts by your favorite Spotify artists in cities you'll be visiting! Thi
 1. **Install Requirements**
    ```bash
    pip install -r requirements.txt
-   pip install spotipy
    ```
 
 2. **Run the Program**
