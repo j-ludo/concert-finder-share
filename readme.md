@@ -24,6 +24,8 @@ Find concerts by your favorite Spotify artists in cities you'll be visiting! Thi
 prescript:
 make sure you have python installed and verify you have the python path setup in your system PATH - feed errors into chatgpt
 
+use claude.ai when you run into problems. For example, the program will prompt you to 'Please download your google calendar API credentials and save them as 'credentials.json', just put that prompt into claude and follow it's instructions. 
+
 1. **Install Requirements**
    ```bash
    pip install -r requirements.txt
